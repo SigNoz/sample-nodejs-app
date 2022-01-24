@@ -5,13 +5,10 @@
 const process = require('process');
 const opentelemetry = require('@opentelemetry/sdk-node');
 const { getNodeAutoInstrumentations } = require('@opentelemetry/auto-instrumentations-node');
-const { ConsoleSpanExporter } = require('@opentelemetry/sdk-trace-base');
-const { Resource } = require('@opentelemetry/resources');
-const { ResourceAttributes } = require('@opentelemetry/semantic-conventions');
-
+const { OTLPTraceExporter } = require('@opentelemetry/exporter-otlp-grpc');
 // configure the SDK to export telemetry data to the console
 // enable all auto-instrumentations from the meta package
-const traceExporter = new ConsoleSpanExporter();
+const traceExporter = new OTLPTraceExporter();
 const sdk = new opentelemetry.NodeSDK({
   traceExporter,
   instrumentations: [getNodeAutoInstrumentations()]
