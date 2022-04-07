@@ -1,0 +1,25 @@
+{
+  "name": "node-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "author": {
+    "name": "Pranshu Chittora",
+    "email": "pranshu@signoz.io",
+    "url": "https://github.com/pranshuchittora"
+  },
+  "scripts": {
+    "start:noenv": "node -r ./tracing.js index.js",
+    "start:local": "OTEL_EXPORTER_OTLP_ENDPOINT=\"http://localhost:4317\" OTEL_RESOURCE_ATTRIBUTES=service.name=node-js-sample-app node -r ./tracing.js index.js"
+  },
+  "dependencies": {
+    "@opentelemetry/api": "^1.0.4",
+    "@opentelemetry/auto-instrumentations-node": "^0.28.0",
+    "@opentelemetry/exporter-otlp-grpc": "^0.26.0",
+    "@opentelemetry/propagator-b3": "^1.0.1",
+    "@opentelemetry/sdk-node": "^0.27.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "nodemon": "^2.0.15"
+  }
+}
