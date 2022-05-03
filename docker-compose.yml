@@ -1,0 +1,17 @@
+version: "3.1"
+
+services:
+  mongo:
+    container_name: mongo_db
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    
+  mongodb-exporter:
+    image: percona/mongodb_exporter:0.30
+    command: --mongodb.uri=mongodb://mongo:27017 --compatible-mode
+    ports:
+      - 9216:9216
+    depends_on:
+      - mongo
