@@ -1,34 +1,54 @@
-// tracing.js
-
 'use strict'
 
-const process = require('process');
-const opentelemetry = require('@opentelemetry/sdk-node');
-const { getNodeAutoInstrumentations } = require('@opentelemetry/auto-instrumentations-node');
-const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-grpc');
+const {
+  BatchSpanProcessor,
+} = require('@opentelemetry/tracing')
+const { Resource } = require('@opentelemetry/resources')
+const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions')
+const { registerInstrumentations } = require('@opentelemetry/instrumentation')
+const { getNodeAutoInstrumentations } = require('@opentelemetry/auto-instrumentations-node')
+const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-grpc')
+const { NodeTracerProvider } = require('@opentelemetry/sdk-trace-node')
 const grpc = require('@grpc/grpc-js');
 
-// configure the SDK to export telemetry data to the console
-// enable all auto-instrumentations from the meta package
-const traceExporter = new OTLPTraceExporter({
-  credentials: grpc.credentials.createInsecure(),
+const hostName = process.env.OTEL_TRACE_HOST || 'localhost'
+
+const init = (serviceName, environment) => {
+
+  // use OTLP exporter to send traces to the collector
+  const exporter = new OTLPTraceExporter({
+    // optional - url default value is http://localhost:4318/v1/traces
+    url: `http://${hostName}:4317`,
+    credentials: grpc.credentials.createInsecure(),
+    // optional - collection of custom headers to be sent with each request, empty by default
+    headers: {},
+  });
+
+  const provider = new NodeTracerProvider({
+    resource: new Resource({
+      [SemanticResourceAttributes.SERVICE_NAME]: serviceName, // Service name that should be listed in SigNoz UI
+      [SemanticResourceAttributes.DEPLOYMENT_ENVIRONMENT]: environment,
+    }),
+  })
+
+  // Use the BatchSpanProcessor to export spans in batches in order to more efficiently use resources.
+  provider.addSpanProcessor(new BatchSpanProcessor(exporter))
+
+  // Enable to see the spans printed in the console by the ConsoleSpanExporter
+  // provider.addSpanProcessor(new SimpleSpanProcessor(new ConsoleSpanExporter())) 
+
+  provider.register()
+
+  console.log('tracing initialized')
+
+  registerInstrumentations({
+    instrumentations: [new getNodeAutoInstrumentations()],
+  })
+
+  const tracer = provider.getTracer(serviceName)
+  return { tracer }
 }
-);
-const sdk = new opentelemetry.NodeSDK({
-  traceExporter,
-  instrumentations: [getNodeAutoInstrumentations()]
-});
 
-// initialize the SDK and register with the OpenTelemetry API
-// this enables the API to record telemetry
-sdk.start()
-  .then(() => console.log('Tracing initialized'))
-  .catch((error) => console.log('Error initializing tracing', error));
-
-// gracefully shut down the SDK on process exit
-process.on('SIGTERM', () => {
-  sdk.shutdown()
-    .then(() => console.log('Tracing terminated'))
-    .catch((error) => console.log('Error terminating tracing', error))
-    .finally(() => process.exit(0));
-});
+module.exports = {
+  init: init,
+}
