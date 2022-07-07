@@ -4,4 +4,4 @@ Install the dependency packages
 
 Start the server and start sending data to SigNoz
 
-```node index.js```
+```OTEL_EXPORTER_OTLP_ENDPOINT="<IP of SigNoz>:4317" OTEL_RESOURCE_ATTRIBUTES=service.name=nodeJsApp node -r ./tracing.js index.js```
