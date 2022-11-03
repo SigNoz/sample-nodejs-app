@@ -1,5 +1,4 @@
 const { init } = require('./tracing')
-const api = require('@opentelemetry/api')
 init('demo-node-service', 'development')
 
 const express = require("express");
