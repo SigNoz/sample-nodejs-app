@@ -10,7 +10,7 @@ const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventi
 const init = (serviceName, environment) => {
 
   const exporterOptions = {
-    url: 'http://stagingapp.signoz.io:4318/v1/traces'
+    url: 'http://localhost:4318/v1/traces'
   }
 
   const traceExporter = new OTLPTraceExporter(exporterOptions);
