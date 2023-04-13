@@ -1,12 +1,47 @@
-### Install the dependency packages
+# Sample NodeJS App
 
-```npm i```
+This is Sample NodeJS App for sending traces to SigNoz.
 
-### Start the server and start sending data to SigNoz
+## Prerequisites
 
-```node -r ./tracing.js index.js```
+- [NodeJS](https://nodejs.org/en/download/) (v12 or above)
+- [SigNoz](https://signoz.io/docs/install/)
+## Running the code
 
-App will start on ```http://localhost:5555``` by default.
+Start the SigNoz server following the instructions:
+
+```bash
+git clone -b main https://github.com/SigNoz/signoz.git
+cd signoz/deploy/
+./install.sh
+```
+
+_*Note:* Replace OTEL_EXPORTER_OTLP_ENDPOINT environment variable with SigNoz OTLP endpoint, if SigNoz not running on host machine._
+
+### Using `docker-compose`
+
+```bash
+docker-compose up -d
+```
+
+Go to http://localhost:5555 to generate telemetry data.
+View traces and metrics at http://localhost:3301.
+
+### Using Source
+
+To install the dependency packages:
+
+```bash
+npm install
+```
+
+To start the server and start sending data to SigNoz:
+
+```bash
+node -r ./tracing.js index.js
+```
+
+App will start on `http://localhost:5555` by default.
 
 ### Validate instrumentation by checking for traces
 
