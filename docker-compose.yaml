@@ -3,12 +3,11 @@
 version: '3'
 services:
   web:
-    image: sample-nodejs:latest
-    build: .
+    image: signoz/sample-nodejs:latest
     ports:
       - "5555:5555"
     extra_hosts:
       - signoz:host-gateway
     environment:
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://stagingapp.signoz.io:4318/v1/traces  # Replace with SigNoz OTLP endpoint, if SigNoz not running on host machine
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://signoz:4318/v1/traces  # Replace with SigNoz OTLP endpoint, if SigNoz not running on host machine
       - OTEL_RESOURCE_ATTRIBUTES=service.name=sample-nodejs
