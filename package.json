@@ -9,7 +9,7 @@
     "url": "https://github.com/SigNoz"
   },
   "scripts": {
-    "start:noenv": "node -r ./tracing.js index.js",
+    "start": "node -r ./tracing.js index.js",
     "start:local": "OTEL_EXPORTER_OTLP_ENDPOINT=\"http://localhost:4317\" OTEL_RESOURCE_ATTRIBUTES=service.name=node-js-sample-app node -r ./tracing.js index.js"
   },
   "dependencies": {
