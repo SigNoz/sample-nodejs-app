@@ -1,6 +1,5 @@
 
-# Path: docker-compose.yml
-version: '3'
+version: "2.4"
 services:
   web:
     image: signoz/sample-nodejs:latest
