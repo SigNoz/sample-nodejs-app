@@ -2,7 +2,7 @@
 version: "2.4"
 services:
   web:
-    image: signoz/sample-nodejs:latest
+    image: signoz/sample-nodejs-app:latest
     ports:
       - "5555:5555"
     extra_hosts:

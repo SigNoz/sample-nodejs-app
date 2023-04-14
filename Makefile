@@ -1,5 +1,5 @@
 REPONAME ?= signoz
-IMAGE_NAME ?= sample-nodejs
+IMAGE_NAME ?= sample-nodejs-app
 DOCKER_TAG ?= latest
 
 .PHONY: build-docker
