@@ -1,5 +1,4 @@
-# Makefile for build and push docker images
-REPONAME ?= coolboi567
+REPONAME ?= signoz
 IMAGE_NAME ?= sample-nodejs
 DOCKER_TAG ?= latest
 
