@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "node -r ./tracing.js index.js",
-    "start:local": "OTEL_EXPORTER_OTLP_ENDPOINT=\"http://stagingapp.signoz.io:4318/v1/traces\" OTEL_RESOURCE_ATTRIBUTES=service.name=node-js-sample-app node -r ./tracing.js index.js"
+    "start:local": "OTEL_EXPORTER_OTLP_ENDPOINT=\"http://localhost:4317\" OTEL_RESOURCE_ATTRIBUTES=service.name=node-js-sample-app node -r ./tracing.js index.js"
   },
   "dependencies": {
     "@opentelemetry/api": "^1.4.1",
