@@ -1,14 +1,12 @@
 'use strict'
 
 const process = require('process');
-const api = require('@opentelemetry/api');
 const opentelemetry = require('@opentelemetry/sdk-node');
 const { getNodeAutoInstrumentations } = require('@opentelemetry/auto-instrumentations-node');
-const { OTLPTraceExporter } = require('@opentelemetry/exporter-otlp-grpc');
+const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-http');
 const { MongoDBInstrumentation } = require('@opentelemetry/instrumentation-mongodb');
-const { W3CTraceContextPropagator } = require("@opentelemetry/core");
-
-api.propagation.setGlobalPropagator(new W3CTraceContextPropagator());
+const { diag, DiagConsoleLogger, DiagLogLevel } = require('@opentelemetry/api');
+diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.DEBUG);
 
 const traceExporter = new OTLPTraceExporter();
 const sdk = new opentelemetry.NodeSDK({
@@ -21,8 +19,6 @@ const sdk = new opentelemetry.NodeSDK({
 // initialize the SDK and register with the OpenTelemetry API
 // this enables the API to record telemetry
 sdk.start()
-  .then(() => console.log('Tracing initialized'))
-  .catch((error) => console.log('Error initializing tracing', error));
 
 // gracefully shut down the SDK on process exit
 process.on('SIGTERM', () => {
