@@ -16,6 +16,7 @@ const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventi
 
 const exporterOptions = {
   url: process.env.OTEL_EXPORTER_OTLP_ENDPOINT || 'http://localhost:4318/v1/traces',
+  // headers: { 'signoz-access-token': 'your SigNoz Cloud ingestion key' }, // Use if you are using SigNoz Cloud
 }
 
 const traceExporter = new OTLPTraceExporter(exporterOptions);
