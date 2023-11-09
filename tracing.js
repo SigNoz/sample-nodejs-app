@@ -7,10 +7,19 @@ const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-http')
 const { Resource } = require('@opentelemetry/resources');
 const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
 
+// Add otel logging when debugging
+// const { diag, DiagConsoleLogger, DiagLogLevel } = require('@opentelemetry/api');
+// diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.DEBUG);
+
+// do not set headers in exporterOptions, the OTel spec recommends setting headers through ENV variables
+// https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/protocol/exporter.md#specifying-headers-via-environment-variables
+
+
 const init = (serviceName, environment) => {
 
   const exporterOptions = {
-    url: 'http://localhost:4318/v1/traces'
+    url: 'https://ingest.us.signoz.cloud:443/v1/traces',
+    // headers: { 'signoz-access-token': 'your SigNoz Cloud ingestion key' }, // Use if you are using SigNoz Cloud
   }
 
   const traceExporter = new OTLPTraceExporter(exporterOptions);
@@ -26,8 +35,6 @@ const init = (serviceName, environment) => {
   // initialize the SDK and register with the OpenTelemetry API
   // this enables the API to record telemetry
   sdk.start()
-    .then(() => console.log('Tracing initialized'))
-    .catch((error) => console.log('Error initializing tracing', error));
 
   // gracefully shut down the SDK on process exit
   process.on('SIGTERM', () => {

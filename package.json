@@ -9,9 +9,10 @@
     "url": "https://github.com/SigNoz"
   },
   "dependencies": {
-    "@opentelemetry/auto-instrumentations-node": "^0.33.1",
-    "@opentelemetry/exporter-trace-otlp-http": "^0.33.0",
-    "@opentelemetry/sdk-node": "^0.33.0",
+    "@opentelemetry/api": "^1.6.0",
+    "@opentelemetry/auto-instrumentations-node": "^0.39.4",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.45.0",
+    "@opentelemetry/sdk-node": "^0.45.0",
     "cors": "^2.8.5",
     "express": "^4.17.3",
     "nodemon": "^2.0.15"
