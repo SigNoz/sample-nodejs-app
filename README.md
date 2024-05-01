@@ -38,7 +38,12 @@ npm install
 To start the server and start sending data to SigNoz:
 
 ```bash
-node -r ./tracing.js index.js
+export OTEL_TRACES_EXPORTER="otlp"
+export OTEL_EXPORTER_OTLP_ENDPOINT="your_signoz_endpoint"
+export OTEL_NODE_RESOURCE_DETECTORS="env,host,os"
+export OTEL_SERVICE_NAME="sample-node-app"
+export NODE_OPTIONS="--require @opentelemetry/auto-instrumentations-node/register"
+node app.js
 ```
 
 App will start on `http://localhost:5555` by default.
