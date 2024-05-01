@@ -43,6 +43,7 @@ export OTEL_EXPORTER_OTLP_ENDPOINT="your_signoz_endpoint"
 export OTEL_NODE_RESOURCE_DETECTORS="env,host,os"
 export OTEL_SERVICE_NAME="sample-node-app"
 export NODE_OPTIONS="--require @opentelemetry/auto-instrumentations-node/register"
+export OTEL_EXPORTER_OTLP_HEADERS="signoz-access-token=[your-token-here]"
 node app.js
 ```
 
