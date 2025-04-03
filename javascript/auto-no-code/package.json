@@ -1,0 +1,17 @@
+{
+  "name": "auto-no-code",
+  "version": "1.0.0",
+  "description": "js code for no code automatic instrumentation ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "@uncool-0x",
+  "license": "ISC",
+  "dependencies": {
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/auto-instrumentations-node": "^0.57.0",
+    "axios": "^1.8.4",
+    "express": "^4.21.2"
+  }
+}

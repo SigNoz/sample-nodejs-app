@@ -7,24 +7,25 @@ const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-http')
 const { Resource } = require('@opentelemetry/resources');
 const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
 
-// // Add otel logging when debugging
-// const { diag, DiagConsoleLogger, DiagLogLevel } = require('@opentelemetry/api');
-// diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.DEBUG);
-
 // do not set headers in exporterOptions, the OTel spec recommends setting headers through ENV variables
 // https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/protocol/exporter.md#specifying-headers-via-environment-variables
 
+// highlight-start
 const exporterOptions = {
-  url: process.env.OTEL_EXPORTER_OTLP_ENDPOINT || 'http://localhost:4318/v1/traces',
-  // headers: { 'signoz-access-token': 'your SigNoz Cloud ingestion key' }, // Use if you are using SigNoz Cloud
+  url: 'https://ingest.<REGION>.signoz.cloud:443/v1/traces',
+  headers: {
+      "signoz-access-token": "<SIGNOZ_INGESTION_KEY>"
+    }
 }
+// highlight-end
 
 const traceExporter = new OTLPTraceExporter(exporterOptions);
 const sdk = new opentelemetry.NodeSDK({
   traceExporter,
   instrumentations: [getNodeAutoInstrumentations()],
   resource: new Resource({
-    [SemanticResourceAttributes.SERVICE_NAME]: 'node_app'
+    // highlight-next-line
+    [SemanticResourceAttributes.SERVICE_NAME]: '<SERVICE_NAME>'
   })
 });
 

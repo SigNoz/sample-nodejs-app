@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      OTEL_TRACES_EXPORTER: "otlp"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "https://ingest.<region>.signoz.cloud:443"
+      OTEL_NODE_RESOURCE_DETECTORS: "env,host,os"
+      OTEL_SERVICE_NAME: "<APP_NAME>"
+      OTEL_EXPORTER_OTLP_HEADERS: "signoz-ingestion-key=<your-ingestion-key>"
+      NODE_OPTIONS: "--require @opentelemetry/auto-instrumentations-node/register"
+    command: ["npm", "start"]
