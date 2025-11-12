@@ -17,7 +17,7 @@ Your sample app already includes a `tracing.js` or `tracing.ts` file. Update the
 2. **Set the Ingestion Key**
    - Replace `<your-ingestion-key>` with your SigNoz ingestion key.
    ```js
-   headers: { "signoz-access-token": "<your-ingestion-key>" }
+   headers: { "signoz-ingestion-key": "<your-ingestion-key>" }
    ```
 
 3. **Set the Service Name**
