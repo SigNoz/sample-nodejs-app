@@ -1,21 +1,23 @@
 // tracing.js
-'use strict'
+'use strict';
 const process = require('process');
 const opentelemetry = require('@opentelemetry/sdk-node');
 const { getNodeAutoInstrumentations } = require('@opentelemetry/auto-instrumentations-node');
 const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-http');
-const { Resource } = require('@opentelemetry/resources');
-const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
+const { resourceFromAttributes } = require('@opentelemetry/resources');
+const {
+  ATTR_SERVICE_NAME,
+} = require('@opentelemetry/semantic-conventions');
 
 // do not set headers in exporterOptions, the OTel spec recommends setting headers through ENV variables
 // https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/protocol/exporter.md#specifying-headers-via-environment-variables
 
 // highlight-start
 const exporterOptions = {
-  url: 'https://ingest.<REGION>.signoz.cloud:443/v1/traces',
+  url: 'https://ingest.in.signoz.cloud:443/v1/traces',
   headers: {
-      "signoz-access-token": "<SIGNOZ_INGESTION_KEY>"
-    }
+    "signoz-access-token": "0t7CmBx40m7LMoigzk-E0STdqUAJMo2yqAdS"
+  }
 }
 // highlight-end
 
@@ -23,10 +25,9 @@ const traceExporter = new OTLPTraceExporter(exporterOptions);
 const sdk = new opentelemetry.NodeSDK({
   traceExporter,
   instrumentations: [getNodeAutoInstrumentations()],
-  resource: new Resource({
-    // highlight-next-line
-    [SemanticResourceAttributes.SERVICE_NAME]: '<SERVICE_NAME>'
-  })
+  resource: resourceFromAttributes({
+    [ATTR_SERVICE_NAME]: 'updated-auto-code-level',
+  }),
 });
 
 // initialize the SDK and register with the OpenTelemetry API

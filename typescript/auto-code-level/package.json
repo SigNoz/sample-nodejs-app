@@ -13,19 +13,16 @@
   "description": "",
   "dependencies": {
     "@opentelemetry/api": "^1.9.0",
-    "@opentelemetry/auto-instrumentations-node": "^0.57.0",
-    "@opentelemetry/exporter-metrics-otlp-proto": "^0.200.0",
-    "@opentelemetry/exporter-trace-otlp-proto": "^0.200.0",
-    "@opentelemetry/sdk-metrics": "^2.0.0",
-    "@opentelemetry/sdk-node": "^0.200.0",
-    "@opentelemetry/sdk-trace-node": "^2.0.0",
-    "axios": "^1.8.4",
-    "express": "^4.21.2"
+    "@opentelemetry/auto-instrumentations-node": "^0.67.0",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.208.0",
+    "@opentelemetry/sdk-node": "^0.208.0",
+    "axios": "^1.13.2",
+    "express": "^5.1.0"
   },
   "devDependencies": {
-    "@types/express": "^5.0.1",
-    "@types/node": "^22.13.11",
+    "@types/express": "^5.0.5",
+    "@types/node": "^24.10.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.2"
+    "typescript": "^5.9.3"
   }
 }

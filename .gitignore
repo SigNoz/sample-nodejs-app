@@ -1,3 +1,58 @@
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Dependency directories
+node_modules/
+**/node_modules/
+.npm/
+
+# Optional npm cache
+.cache/
+.parcel-cache/
+
+# Runtime data
+pids/
+*.pid
+*.pid.lock
+*.seed
+
+# Build output
+dist/
+build/
+out/
+lib/
+coverage/
+.nyc_output/
+
+# Framework-specific
+.next/
+.nuxt/
+
+# TypeScript
+*.tsbuildinfo
+
+# Environment
+.env
+.env.*.local
+
+# Editor directories
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Project scripts
 /javascript/auto-no-code/cmd.sh
 /javascript/auto-no-code/node_modules
 /javascript/auto-code-level/cmd.sh

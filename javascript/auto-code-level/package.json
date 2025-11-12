@@ -9,11 +9,11 @@
   "author": "@uncool-0x",
   "license": "ISC",
   "dependencies": {
-    "@opentelemetry/api": "^1.6.0",
-    "@opentelemetry/auto-instrumentations-node": "^0.39.4",
-    "@opentelemetry/exporter-trace-otlp-http": "^0.45.1",
-    "@opentelemetry/sdk-node": "^0.45.1",
-    "axios": "^1.8.4",
-    "express": "^4.21.2"
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/auto-instrumentations-node": "^0.67.0",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.208.0",
+    "@opentelemetry/sdk-node": "^0.208.0",
+    "axios": "^1.13.2",
+    "express": "^5.1.0"
   }
 }
