@@ -10,7 +10,7 @@ const sdk = new opentelemetry.NodeSDK({
     // optional - default url is http://localhost:4318/v1/traces
     url: 'https://ingest.<REGION>.signoz.cloud:443/v1/traces', // url is optional and can be omitted 
       headers: {
-        "signoz-access-token": "<SIGNOZ_INGESTION_KEY>"
+        "signoz-ingestion-key": "<your-ingestion-key>"
       } // an optional object containing custom headers to be sent with each request
   }),
   instrumentations: [getNodeAutoInstrumentations()],

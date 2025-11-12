@@ -16,7 +16,7 @@ const {
 const exporterOptions = {
   url: 'https://ingest.in.signoz.cloud:443/v1/traces',
   headers: {
-    "signoz-access-token": "0t7CmBx40m7LMoigzk-E0STdqUAJMo2yqAdS"
+    "signoz-ingestion-key": '<your-ingestion-key>'
   }
 }
 // highlight-end
